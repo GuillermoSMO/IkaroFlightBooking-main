@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cuenca - Ikaro Flight Booking</title>
+
+    <link rel="preload" href="css/styles.css" as="style" />
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      .city-hero {
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+          url("Imagenes/cuenca.png") center/cover no-repeat;
+        height: 60vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-align: center;
+      }
+
+      .city-hero h1 {
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+      }
+
+      .city-hero p {
+        font-size: 1.3rem;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin: 40px 0;
+      }
+
+      .info-card {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .info-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+      }
+
+      .info-card h3 {
+        color: var(--color-primario);
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .info-card .icon {
+        font-size: 2rem;
+      }
+
+      .attractions-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+        margin: 30px 0;
+      }
+
+      .attraction-card {
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+
+      .attraction-card:hover {
+        transform: scale(1.02);
+      }
+
+      .attraction-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+
+      .attraction-content {
+        padding: 20px;
+      }
+
+      .attraction-content h4 {
+        color: var(--color-primario);
+        margin-bottom: 10px;
+        font-size: 1.2rem;
+      }
+
+      .activities-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin: 30px 0;
+      }
+
+      .activity-item {
+        background: linear-gradient(135deg, #fff8e1, #ffe0b2);
+        padding: 20px;
+        border-radius: 10px;
+        border-left: 4px solid #ff9800;
+      }
+
+      .activity-item h4 {
+        color: var(--color-primario);
+        margin-bottom: 8px;
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 2.5rem;
+        color: var(--color-primario);
+        margin: 50px 0 30px 0;
+        position: relative;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 3px;
+        background: var(--color-secundario);
+      }
+
+      .weather-widget {
+        background: linear-gradient(135deg, #ffa726, #ff7043);
+        color: white;
+        padding: 20px;
+        border-radius: 12px;
+        text-align: center;
+      }
+
+      .weather-widget h3 {
+        color: white !important;
+      }
+
+      .back-button {
+        display: inline-block;
+        background-color: var(--color-primario);
+        color: white;
+        padding: 12px 25px;
+        margin: 20px 0;
+        border-radius: 8px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+      }
+
+      .back-button:hover {
+        background-color: var(--color-secundario);
+      }
+
+      .coastal-card {
+        background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+        border-left: 4px solid #2196f3;
+      }
+    </style>
+
+    <script defer>
+      document.addEventListener("DOMContentLoaded", () => {
+        const toggleMenu = document.querySelector(".menu-toggle");
+        const nav = document.querySelector(".nav");
+        toggleMenu.addEventListener("click", () =>
+          nav.classList.toggle("show")
+        );
+
+        // Animación de aparición gradual
+        const cards = document.querySelectorAll(
+          ".info-card, .attraction-card, .activity-item"
+        );
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.style.opacity = "1";
+              entry.target.style.transform = "translateY(0)";
+            }
+          });
+        });
+
+        cards.forEach((card) => {
+          card.style.opacity = "0";
+          card.style.transform = "translateY(20px)";
+          card.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+          observer.observe(card);
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header class="main-header">
+      <div class="container header-container">
+        <a href="index.html" class="logo">
+          <img src="Imagenes/images.png" alt="Logo Ikaro" />
+        </a>
+        <button class="menu-toggle" aria-label="Abrir menú">☰</button>
+        <nav class="nav">
+          <a href="reservar.html">Reservar</a>
+          <a href="ofertasydestinos.html">Ofertas y destinos</a>
+          <a href="tureserva.html"
+            >Tu reserva <span class="check">check-in</span></a
+          >
+          <a href="informacionayuda.html">Información y ayuda</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero de la ciudad -->
+    <section class="city-hero">
+      <div class="container">
+        <h1>⛪ Cuenca</h1>
+        <p>
+          Conocida como la "Atenas del Ecuador", Patrimonio Cultural de la
+          Humanidad. Descubre su arquitectura colonial, su rica cultura y
+          hermosos paisajes.
+        </p>
+      </div>
+    </section>
+
+    <main class="container">
+      <a href="index.html" class="back-button">← Volver al inicio</a>
+
+      <!-- Información general -->
+      <div class="info-grid">
+        <div class="info-card weather-widget">
+          <h3><span class="icon">⛅</span> Clima</h3>
+          <p><strong>Temperatura promedio:</strong> 14°C - 23°C</p>
+          <p><strong>Mejor época:</strong> Junio a diciembre (menos lluvias)</p>
+          <p>Clima templado de montaña</p>
+        </div>
+
+        <div class="info-card coastal-card">
+          <h3><span class="icon">📍</span> Ubicación</h3>
+          <p><strong>Altitud:</strong> 2,560 metros sobre el nivel del mar</p>
+          <p><strong>Población:</strong> 600,000 mil (área metropolitana)</p>
+          <p><strong>Fundación:</strong> 12 de abril de 1557</p>
+        </div>
+
+        <div class="info-card">
+          <h3><span class="icon">💰</span> Moneda y Costos</h3>
+          <p><strong>Moneda:</strong> Dólar estadounidense (USD)</p>
+          <p><strong>Presupuesto diario:</strong> $25-70 por persona</p>
+          <p><strong>Taxi aeropuerto:</strong> $8-12</p>
+        </div>
+      </div>
+
+      <!-- Lugares turísticos -->
+      <h2 class="section-title">✨ Lugares Turísticos Imprescindibles</h2>
+      <div class="attractions-grid">
+        <div class="attraction-card">
+          <img src="Imagenes/catedral.jpg" alt="Catedral Nueva" />
+          <div class="attraction-content">
+            <h4>Catedral Nueva (Catedral de la Inmaculada Concepción)</h4>
+            <p>
+              Emblema de Cuenca, con sus cúpulas azules y su impresionante
+              arquitectura. Sube a sus terrazas para disfrutar de vistas
+              panorámicas.
+            </p>
+          </div>
+        </div>
+
+        <div class="attraction-card">
+          <img src="Imagenes/parque-calderon.jpeg" alt="Parque Calderón" />
+          <div class="attraction-content">
+            <h4>Parque Calderón</h4>
+            <p>
+              El corazón de Cuenca, rodeado por la Catedral Nueva y la Catedral
+              Vieja. Un lugar ideal para relajarse y observar la vida cuencana.
+            </p>
+          </div>
+        </div>
+
+        <div class="attraction-card">
+          <img src="Imagenes/rio-tombamba.jpg" alt="Barranco del Tomebamba" />
+          <div class="attraction-content">
+            <h4>Barranco del Río Tomebamba</h4>
+            <p>
+              Disfruta de un paseo por el río Tomebamba, admirando las casas
+              coloniales que se asoman al barranco. Ideal para caminar y tomar
+              fotografías.
+            </p>
+          </div>
+        </div>
+
+        <div class="attraction-card">
+          <img src="Imagenes/mirador.jpg" alt="Mirador de Turi" />
+          <div class="attraction-content">
+            <h4>Mirador de Turi</h4>
+            <p>
+              Ofrece las mejores vistas panorámicas de Cuenca, especialmente al
+              atardecer o por la noche, cuando la ciudad se ilumina.
+            </p>
+          </div>
+        </div>
+
+        <div class="attraction-card">
+          <img
+            src="Imagenes/museo.jpg"
+            alt="Museo del Sombrero de Paja Toquilla"
+          />
+          <div class="attraction-content">
+            <h4>Museo del Sombrero de Paja Toquilla</h4>
+            <p>
+              Aprende sobre la historia y elaboración del famoso sombrero de
+              Panamá, que en realidad es de Ecuador. Incluso puedes comprar uno.
+            </p>
+          </div>
+        </div>
+
+        <div class="attraction-card">
+          <img src="Imagenes/mercado-cuenca.jpg" alt="Mercado 10 de Agosto" />
+          <div class="attraction-content">
+            <h4>Mercado 10 de Agosto</h4>
+            <p>
+              Un vibrante mercado tradicional donde puedes probar frutas
+              exóticas, comida típica y sumergirte en la cultura local.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Actividades -->
+      <h2 class="section-title">🎨 Actividades y Experiencias Culturales</h2>
+      <div class="activities-list">
+        <div class="activity-item">
+          <h4>🍲 Gastronomía Andina</h4>
+          <p>
+            Prueba la fritada, el hornado, el mote pillo y el cuy. Los
+            restaurantes del Centro Histórico y las picanterías son excelentes
+            opciones.
+          </p>
+        </div>
+
+        <div class="activity-item">
+          <h4>🛍️ Compras de Artesanías</h4>
+          <p>
+            Explora las tiendas de artesanías para encontrar joyas de filigrana,
+            cerámica, textiles y, por supuesto, sombreros de paja toquilla.
+          </p>
+        </div>
+
+        <div class="activity-item">
+          <h4>🏞️ Visita al Parque Nacional Cajas</h4>
+          <p>
+            Realiza una excursión a este impresionante parque de altura, con más
+            de 200 lagunas glaciares y paisajes andinos únicos.
+          </p>
+        </div>
+
+        <div class="activity-item">
+          <h4>🏛️ Museos de Arte e Historia</h4>
+          <p>
+            Visita el Museo Pumapungo, el Museo de Arte Moderno, o el Museo de
+            las Culturas Aborígenes para conocer la rica historia de la región.
+          </p>
+        </div>
+
+        <div class="activity-item">
+          <h4>🚶‍♂️ Caminatas por el Centro Histórico</h4>
+          <p>
+            Piérdete por sus calles adoquinadas, admirando la arquitectura
+            colonial y descubriendo iglesias y plazas escondidas.
+          </p>
+        </div>
+
+        <div class="activity-item">
+          <h4>🛀 Aguas Termales de Baños</h4>
+          <p>
+            Relájate en las aguas termales de Baños, ubicadas a pocos minutos de
+            Cuenca, ideales para un día de bienestar.
+          </p>
+        </div>
+      </div>
+
+      <!-- Información práctica -->
+      <div class="info-grid">
+        <div class="info-card">
+          <h3><span class="icon">🚌</span> Transporte</h3>
+          <p><strong>Tranvía:</strong> Conecta el centro con el aeropuerto</p>
+          <p><strong>Buses urbanos:</strong> Amplia cobertura en la ciudad</p>
+          <p><strong>Taxis:</strong> Disponibles en toda la ciudad</p>
+          <p><strong>Caminata:</strong> La mejor forma de explorar el Centro</p>
+        </div>
+
+        <div class="info-card">
+          <h3><span class="icon">🏨</span> Alojamiento</h3>
+          <p>
+            <strong>Centro Histórico:</strong> Hoteles boutique y coloniales
+          </p>
+          <p><strong>El Ejido:</strong> Zona con hoteles modernos</p>
+          <p><strong>Barrios residenciales:</strong> Hostales y B&B</p>
+          <p><strong>Rango de precios:</strong> $15-180 por noche</p>
+        </div>
+
+        <div class="info-card">
+          <h3><span class="icon">⚠️</span> Consejos de Viaje</h3>
+          <p>
+            <strong>Clima:</strong> Vístete en capas, puede variar durante el
+            día
+          </p>
+          <p><strong>Altitud:</strong> Adapta tu ritmo y mantente hidratado</p>
+          <p>
+            <strong>Seguridad:</strong> Cuida tus pertenencias en lugares
+            concurridos
+          </p>
+          <p><strong>Idioma:</strong> Español</p>
+        </div>
+      </div>
+
+      <!-- Botón de reserva -->
+      <section class="check-in">
+        <h2>¿Listo para descubrir Cuenca?</h2>
+        <p>
+          Reserva tu vuelo ahora y sumérgete en la elegancia y tradición de esta
+          ciudad colonial.
+        </p>
+        <a href="reservar.html" class="btn-cta">Reservar vuelo a Cuenca</a>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+      <div class="container footer-content">
+        <p>&copy; Ikaro 2025. Todos los derechos reservados.</p>
+        <div class="footer-options">
+          <select class="idioma">
+            <option disabled selected>Idioma</option>
+            <option value="es">Español</option>
+            <option value="en">Inglés</option>
+            <option value="fr">Francés</option>
+            <option value="pt">Portugués</option>
+          </select>
+          <select class="pais">
+            <option disabled selected>País</option>
+            <option value="ec">Ecuador</option>
+            <option value="pe">Perú</option>
+            <option value="co">Colombia</option>
+            <option value="ar">Argentina</option>
+            <option value="br">Brasil</option>
+            <option value="us">Estados Unidos</option>
+            <option value="mx">México</option>
+          </select>
+          <a href="login.html" class="btn-cta">Cuenta Lifemiles</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

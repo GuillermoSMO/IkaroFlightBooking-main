@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ikaro - Flight Booking</title>
+
+  <link rel="preload" href="css/styles.css" as="style" />
+  <link rel="stylesheet" href="css/normalize.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet" />
+
+  <script defer>
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggleMenu = document.querySelector('.menu-toggle');
+      const nav = document.querySelector('.nav');
+      toggleMenu.addEventListener('click', () => nav.classList.toggle('show'));
+    });
+  </script>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="main-header">
+    <div class="container header-container">
+      <a href="index.html" class="logo">
+        <img src="Imagenes/images.png" alt="Logo Ikaro" />
+      </a>
+      <button class="menu-toggle" aria-label="Abrir menú">☰</button>
+      <nav class="nav">
+        <a href="reservar.html">Reservar</a>
+        <a href="ofertasydestinos.html">Ofertas y destinos</a>
+        <a href="tureserva.html">Tu reserva <span class="check">check-in</span></a>
+        <a href="informacionayuda.html">Información y ayuda</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content container">
+      <h1>Bienvenido a Ikaro Flight Booking</h1>
+    </div>
+  </section>
+
+  <!-- Formulario de búsqueda -->
+  <section class="container search-section">
+    <form class="search-form">
+      <div class="radio-group">
+        <label><input type="radio" name="ida-vuelta" value="ida-vuelta" checked /> Ida y vuelta</label>
+        <label><input type="radio" name="ida-vuelta" value="solo-ida" /> Solo ida</label>
+      </div>
+      <div class="form-fields">
+        <input type="search" placeholder="Origen" required />
+        <input type="search" placeholder="Destino" required />
+        <input type="date" required />
+        <input type="date" />
+        <button type="submit">Buscar</button>
+      </div>
+    </form>
+  </section>
+
+  <main class="container">
+    <!-- Tabla de vuelos -->
+    <section class="tabla">
+      <h2>Tabla de vuelos</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Vuelo</th>
+            <th>Origen</th>
+            <th>Destino</th>
+            <th>Fecha</th>
+            <th>Hora</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>IKR123</td>
+            <td>Quito</td>
+            <td>Guayaquil</td>
+            <td>2025-10-01</td>
+            <td>10:00 AM</td>
+          </tr>
+          <tr>
+            <td>IKR456</td>
+            <td>Guayaquil</td>
+            <td>Cuenca</td>
+            <td>2025-10-02</td>
+            <td>11:00 AM</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Ofertas y destinos -->
+    <section class="oferta-destinos">
+      <h2>Ofertas y destinos</h2>
+      <label for="origen">Ofertas desde:</label>
+      <select id="origen">
+        <option>Quito</option>
+        <option>Guayaquil</option>
+        <option>Cuenca</option>
+      </select>
+      <div class="destinos abanico">
+        <div class="destino">
+          <img src="Imagenes/quito.png" alt="Quito" />
+          <h3>Quito</h3>
+          <p>Desde $100</p>
+        </div>
+        <div class="destino">
+          <img src="Imagenes/Guayaquil.jpg" alt="Guayaquil" />
+          <h3>Guayaquil</h3>
+          <p>Desde $120</p>
+        </div>
+        <div class="destino">
+          <img src="Imagenes/cuenca.png" alt="Cuenca" />
+          <h3>Cuenca</h3>
+          <p>Desde $80</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Check-in -->
+    <section class="check-in">
+      <h2>Prepárate para viajar</h2>
+      <p>Realiza tu check-in y consulta el estado de tu vuelo.</p>
+      <a href="checkin.html" class="btn-cta">Check-in online</a>
+    </section>
+
+    <!-- Contacto -->
+    <!-- Contacto -->
+<section class="registro">
+  <h2>Contáctanos</h2>
+  <form class="contact-form">
+    <fieldset>
+      <legend>Ingresa tus datos</legend>
+      <label for="nombre">Nombre</label>
+      <input id="nombre" type="text" placeholder="Nombre" required />
+
+      <label for="apellido">Apellido</label>
+      <input id="apellido" type="text" placeholder="Apellido" required />
+
+      <label for="documento">Tipo de documento</label>
+      <select id="documento" required>
+        <option value="">Selecciona</option>
+        <option value="cedula">Cédula</option>
+        <option value="pasaporte">Pasaporte</option>
+      </select>
+
+      <label for="numero">Número</label>
+      <input id="numero" type="text" placeholder="Número" required />
+
+      <label for="correo">Correo</label>
+      <input id="correo" type="email" placeholder="Email" required />
+
+      <label for="telefono">Teléfono</label>
+      <input id="telefono" type="tel" placeholder="Teléfono" required />
+
+      <label for="mensaje">Mensaje</label>
+      <textarea id="mensaje" placeholder="Escribe tu mensaje..." rows="4" required></textarea>
+
+      <button type="submit" class="btn-cta">Enviar</button>
+    </fieldset>
+  </form>
+</section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="container footer-content">
+      <p>&copy; Ikaro 2025. Todos los derechos reservados.</p>
+      <div class="footer-options">
+        <select class="idioma">
+          <option disabled selected>Idioma</option>
+          <option value="es">Español</option>
+          <option value="en">Inglés</option>
+          <option value="fr">Francés</option>
+          <option value="pt">Portugués</option>
+        </select>
+        <select class="pais">
+          <option disabled selected>País</option>
+          <option value="ec">Ecuador</option>
+          <option value="pe">Perú</option>
+          <option value="co">Colombia</option>
+          <option value="ar">Argentina</option>
+          <option value="br">Brasil</option>
+          <option value="us">Estados Unidos</option>
+          <option value="mx">México</option>
+        </select>
+        <a href="login.html" class="btn-cta">Cuenta Lifemiles</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
