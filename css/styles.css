@@ -9,7 +9,7 @@
   }
   
   :root {
-    --color-primario: #003366;
+    --color-primario: #EA1C24;
     --color-secundario: #0055a5;
     --color-blanco: #fff;
     --color-fondo: #f4f4f4;
@@ -49,6 +49,11 @@
     align-items: center;
   }
   
+.header-container .logo :hover{
+  transform: scale(1.2);
+  transition: transform 0.4s ease;
+}
+
   .logo img {
     height: 50px;
     width: auto;
@@ -69,6 +74,8 @@
   
   .nav a:hover {
     color: var(--color-secundario);
+    transform: scale(1.1);
+    transition: transform 0.4s ease;
   }
   
   .menu-toggle {
